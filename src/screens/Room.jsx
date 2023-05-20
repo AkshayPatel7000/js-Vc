@@ -22,6 +22,7 @@ const RoomPage = () => {
     const offer = await peer.getOffer();
     socket.emit("user:call", { to: remoteSocketId, offer });
     setMyStream(stream);
+    console.log("🚀 ~ file: Room.jsx:26 ~ handleCallUser ~ stream:", stream)
   }, [remoteSocketId, socket]);
 
   const handleIncommingCall = useCallback(
@@ -32,7 +33,7 @@ const RoomPage = () => {
         video: true,
       });
       setMyStream(stream);
-      console.log(`Incoming Call`, from, offer);
+      console.log(`Incoming Call`, from, offer,stream);
       const ans = await peer.getAnswer(offer);
       socket.emit("call:accepted", { to: from, ans });
     },
